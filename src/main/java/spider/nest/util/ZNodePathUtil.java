@@ -1,8 +1,8 @@
 package spider.nest.util;
 
 import org.springframework.stereotype.Component;
+import spder.task.Task;
 import spider.nest.common.NEST_ZNODE_PATH;
-import spider.nest.entity.Task;
 
 @Component
 public class ZNodePathUtil {

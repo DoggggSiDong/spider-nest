@@ -1,7 +1,6 @@
 package spider.nest.service;
 
-import com.google.gson.JsonObject;
-import spider.nest.entity.Task;
+import spder.task.Task;
 
 import java.util.List;
 

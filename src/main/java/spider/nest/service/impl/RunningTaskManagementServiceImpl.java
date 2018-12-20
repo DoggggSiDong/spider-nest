@@ -2,7 +2,7 @@ package spider.nest.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spider.nest.entity.Task;
+import spder.task.Task;
 import spider.nest.management.node.TaskManagement;
 import spider.nest.service.RunningTaskManagementService;
 
