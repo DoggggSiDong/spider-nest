@@ -1,10 +1,7 @@
-server:
-  port: 9003
 spring:
   application:
     name: spider-nest
 zookeeper:
-  address: localhost:2181
   retryTimes: 10
   retryInterval: 5000
 policy:

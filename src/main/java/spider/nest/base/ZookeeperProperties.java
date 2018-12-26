@@ -1,15 +1,16 @@
 package spider.nest.base;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "zookeeper")
 public class ZookeeperProperties {
+    @Value("${zk.addr}")
     private String address;
     private Integer retryTimes;
     private Integer retryInterval;
-
     @Override
     public String toString() {
         return "ZookeeperProperties{" +
