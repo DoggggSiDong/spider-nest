@@ -11,12 +11,17 @@ import java.util.List;
 @Component("cleanTask")
 public class CleanTaskPolicy implements ServerShutDownPolicy {
     private ZNodePathUtil zNodePathUtil;
+    private Balance balance;
     @Autowired
-    public CleanTaskPolicy(ZNodePathUtil zNodePathUtil){
+    public void setzNodePathUtil(ZNodePathUtil zNodePathUtil){
         this.zNodePathUtil = zNodePathUtil;
     }
+    @Autowired
+    public void setBalance(Balance balance){
+        this.balance = balance;
+    }
     @Override
-    public void handleServerShutDown(CuratorFramework client, Balance balance, String nodeName) throws Exception {
+    public void handleServerShutDown(CuratorFramework client, String nodeName) throws Exception {
         List<String> taskList = client.getChildren().forPath(zNodePathUtil.getTaskPath());
         for(String taskUuid : taskList){
             String owner = new String(client.getData().forPath(zNodePathUtil.getSpecifiedTaskOwnerPath(taskUuid)));

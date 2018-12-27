@@ -5,8 +5,8 @@ zookeeper:
   retryTimes: 10
   retryInterval: 5000
 policy:
-  taskPolicy: noAction
-  serverShutDownPolicy: cleanTask
+  taskPolicy: spider.nest.management.policy.NoActionPolicy
+  serverShutDownPolicy: spider.nest.management.policy.CleanTaskPolicy
 #logging:
 #  path: /home/ds02/bigdataplatform/logs
 

@@ -6,6 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import spider.nest.management.policy.ServerShutDownPolicy;
+import spider.nest.management.policy.TaskUpdatedPolicy;
 
 @Component
 @ConfigurationProperties(prefix = "policy")
@@ -20,29 +22,22 @@ public class PolicyProperties {
                 ", serverShutDownPolicy='" + serverShutDownPolicy + '\'' +
                 '}';
     }
-
-    public String getTaskPolicy() {
-        return taskPolicy;
+    @Bean("selected-task-update-policy")
+    public TaskUpdatedPolicy getTaskPolicy() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class clazz = Class.forName(this.taskPolicy);
+        return (TaskUpdatedPolicy) clazz.newInstance();
     }
-
     public void setTaskPolicy(String taskPolicy) {
         this.taskPolicy = taskPolicy;
     }
-
-    public String getServerShutDownPolicy() {
-        return serverShutDownPolicy;
+    @Bean("selected-server-shut-down-policy")
+    public ServerShutDownPolicy getServerShutDownPolicy() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class clazz = Class.forName(this.serverShutDownPolicy);
+        return (ServerShutDownPolicy) clazz.newInstance();
     }
 
     public void setServerShutDownPolicy(String serverShutDownPolicy) {
         this.serverShutDownPolicy = serverShutDownPolicy;
-    }
-
-    public String getTaskPolicyClazzName(){
-        return "spider.nest.management.policy." + this.taskPolicy;
-    }
-
-    public String getServerShutDownPolicyClazzName(){
-        return "spider.nest.management.policy" + this.serverShutDownPolicy;
     }
 
 }

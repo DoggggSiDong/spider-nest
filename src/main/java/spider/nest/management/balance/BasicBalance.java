@@ -1,6 +1,10 @@
 package spider.nest.management.balance;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import spider.nest.management.node.event.BasicBalanceFixEvent;
+import spider.nest.management.node.event.BasicBalanceUpdatedEvent;
+
 @Component
 public class BasicBalance implements Balance {
     private volatile static int activeNodeNum = 0;
@@ -34,7 +38,12 @@ public class BasicBalance implements Balance {
         return activeNodeNum;
     }
 
-    public void fixBalance(){
+    @EventListener
+    public void ActiveNodeNumChange(BasicBalanceUpdatedEvent event){
+        activeNodeNum = event.getCurrentNum();
+    }
+    @EventListener
+    public void fixBalance(BasicBalanceFixEvent event){
         if (activeNodeNum < currentTaskOwner) {
             currentTaskOwner = activeNodeNum;
         }

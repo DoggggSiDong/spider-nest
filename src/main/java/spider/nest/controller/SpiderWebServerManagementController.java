@@ -50,7 +50,12 @@ public class SpiderWebServerManagementController {
     @RequestMapping(value = "/get/num", method = RequestMethod.POST)
     public Object getAliveServerNum(){
         Map<String,Object> result = new HashMap<>();
-        int num = spiderWebServerManagementService.getAliveNum();
+        int num = 0;
+        try {
+            num = spiderWebServerManagementService.getAliveNum();
+        } catch (Exception e) {
+            return JsonResponse.fail("获取活动节点数量","内部错误");
+        }
         if(num >= 0){
             result.put("aliveNum",num);
             return JsonResponse.success("获取活动节点数量",result);

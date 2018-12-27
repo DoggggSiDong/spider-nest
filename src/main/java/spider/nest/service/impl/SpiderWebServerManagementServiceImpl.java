@@ -24,7 +24,7 @@ public class SpiderWebServerManagementServiceImpl implements SpiderWebServerMana
     }
 
     @Override
-    public int getAliveNum() {
+    public int getAliveNum() throws Exception {
         return spiderWebManagement.getActiveNodeNum();
     }
 }

@@ -56,8 +56,8 @@ public class SpiderWebManagement {
         return nodeInfo;
     }
 
-    public int getActiveNodeNum() {
-        return nodeWatcher.getActiveNodeNum();
+    public int getActiveNodeNum() throws Exception {
+        return client.getChildren().forPath(zNodePathUtil.getSpiderWebNodePath()).size();
     }
 
 

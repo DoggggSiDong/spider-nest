@@ -11,12 +11,17 @@ import java.util.List;
 @Component("reAssignTask")
 public class ReAssignTaskPolicy implements ServerShutDownPolicy {
     private ZNodePathUtil zNodePathUtil;
+    private Balance balance;
     @Autowired
-    public ReAssignTaskPolicy(ZNodePathUtil zNodePathUtil){
+    public void setzNodePathUtil(ZNodePathUtil zNodePathUtil){
         this.zNodePathUtil = zNodePathUtil;
     }
+    @Autowired
+    public void setBalance(Balance balance){
+        this.balance = balance;
+    }
     @Override
-    public void handleServerShutDown(CuratorFramework client, Balance balance, String nodeName) throws Exception {
+    public void handleServerShutDown(CuratorFramework client, String nodeName) throws Exception {
         if(balance.getActiveNodeNum() == 0){
             throw new IllegalStateException("No Active Spider Web Server");
         }
